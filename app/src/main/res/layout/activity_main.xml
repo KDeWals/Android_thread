@@ -38,13 +38,34 @@
         />
 
     <ProgressBar
-        android:id="@+id/pb_main_progressionTH"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@android:style/Widget.ProgressBar.Horizontal"
-        android:max="100"
-        android:layout_margin="10dp"
+    android:id="@+id/pb_main_progressionTH"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@android:style/Widget.ProgressBar.Horizontal"
+    android:max="100"
+    android:layout_margin="10dp"
 
+    />
+
+    <ProgressBar
+    android:id="@+id/pb_main_progressionAS"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@android:style/Widget.ProgressBar.Horizontal"
+    android:max="100"
+    android:layout_margin="10dp"
+    android:visibility="gone"
+    />
+
+    <!-- NOTRE ASYNCTASK -->
+    <Button
+        android:id="@+id/bt_main_startAS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/async_task"
+        android:onClick="onMainClickManager"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="50dp"
         />
 
 </LinearLayout>

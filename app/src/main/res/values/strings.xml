@@ -2,4 +2,5 @@
     <string name="app_name">Thread</string>
     <string name="modifier_le_texte">Modifier le texte</string>
     <string name="thread_go_stop">Thread Go</string>
+    <string name="async_task">Async Task</string>
 </resources>

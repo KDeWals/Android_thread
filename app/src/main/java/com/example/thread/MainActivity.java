@@ -12,7 +12,9 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private ProgressBar pb_main_progressionTH;
+    private ProgressBar pb_main_progressionAS;
     private Button bt_main_startTH;
+    private Button bt_main_startAS;
     private TextView tv_main_txt;
     private ThreadTest monThread;
 
@@ -22,7 +24,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         pb_main_progressionTH = findViewById(R.id.pb_main_progressionTH);
+        pb_main_progressionAS = findViewById(R.id.pb_main_progressionAS);
         bt_main_startTH = findViewById(R.id.bt_main_startTH);
+        bt_main_startAS = findViewById(R.id.bt_main_startAS);
         tv_main_txt = findViewById(R.id.tv_main_txt);
     }
 
@@ -46,7 +50,10 @@ public class MainActivity extends AppCompatActivity {
                     bt_main_startTH.setText("Thread Go");
                 }
                 break;
-
+            case R.id.bt_main_startAS:
+            AsynchroTask asynchroTask = new AsynchroTask(view, bt_main_startAS, pb_main_progressionAS);
+            asynchroTask.execute("paramètre(s) de traitement");
+            break;
         }
     }
 }
