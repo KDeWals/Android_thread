@@ -47,7 +47,7 @@ public class BackgroundTask {
                 "Traitement de la tâche de fond terminé",
                 Toast.LENGTH_LONG).show();
         bt_main_startTrHa.setVisibility(View.VISIBLE);
-        pb_main_progressionTrHa.setProgress(View.GONE);
+        pb_main_progressionTrHa.setVisibility(View.GONE);
     }
 
     private Handler monHandler = new Handler(){
@@ -84,6 +84,7 @@ public class BackgroundTask {
                        e.printStackTrace();
                    }
                }
+                sendPostExecuteMessage();
             }
             catch (Exception e){
                 e.printStackTrace();
