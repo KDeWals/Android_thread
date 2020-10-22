@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:text="@string/modifier_le_texte"
         android:onClick="onMainClickManager"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="20dp"
         />
 
     <!-- NOTRE THREAD -->
@@ -34,7 +34,7 @@
         android:text="@string/thread_go_stop"
         android:onClick="onMainClickManager"
         android:layout_marginBottom="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         />
 
     <ProgressBar
@@ -43,7 +43,7 @@
     android:layout_height="wrap_content"
     style="@android:style/Widget.ProgressBar.Horizontal"
     android:max="100"
-    android:layout_margin="10dp"
+    android:layout_margin="10sp"
 
     />
 
@@ -53,7 +53,7 @@
     android:layout_height="wrap_content"
     style="@android:style/Widget.ProgressBar.Horizontal"
     android:max="100"
-    android:layout_margin="10dp"
+    android:layout_margin="10sp"
     android:visibility="gone"
     />
 
@@ -64,8 +64,39 @@
         android:layout_height="wrap_content"
         android:text="@string/async_task"
         android:onClick="onMainClickManager"
-        android:layout_marginBottom="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        />
+
+    <!-- THREAD + HANDLER -->
+    <Button
+        android:id="@+id/bt_main_startTrHa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/thread_handler"
+        android:onClick="onMainClickManager"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        />
+
+    <ProgressBar
+        android:id="@+id/pb_main_progressionTtHa1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:max="100"
+        android:layout_margin="10sp"
+        android:visibility="gone"
+        />
+
+    <ProgressBar
+        android:id="@+id/pb_main_progressionTtHa2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:max="100"
+        android:layout_margin="10sp"
+        android:visibility="gone"
         />
 
 </LinearLayout>
