@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Thread</string>
+    <string name="modifier_le_texte">Modifier le texte</string>
+    <string name="thread_go_stop">Thread Go</string>
+</resources>
