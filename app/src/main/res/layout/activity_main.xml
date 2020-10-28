@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:text="@string/thread_go_stop"
         android:onClick="onMainClickManager"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
         />
 
@@ -98,5 +98,34 @@
         android:layout_margin="10sp"
         android:visibility="gone"
         />
+    <Button
+        android:id="@+id/bt_main_connexion_S7"
+        android:onClick="onMainClickManager"
+        android:text="@string/connexion_s7"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_main_plc"
+        android:textStyle="italic"
+        android:textSize="20sp"
+        android:background="#3F51B5"
+        android:textColor="#ffffff"
+        android:text="@string/ref_plc"
+        />
+
+    <ProgressBar
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:id="@+id/pb_main_progressionS7"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:max="255"
+        android:visibility="visible"
+        />
+
+
 
 </LinearLayout>

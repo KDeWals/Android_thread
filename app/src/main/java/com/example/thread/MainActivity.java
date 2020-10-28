@@ -2,6 +2,9 @@ package com.example.thread;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +24,13 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar pb_main_progressionTrHa2;
     private Button bt_main_startTrHa;
 
+    private ProgressBar pb_main_progressionS7;
+    private Button bt_main_connexion_S7;
+    private TextView tv_main_plc;
+    private ReadTaskS7 readTaskS7;
+    private NetworkInfo network;
+    private ConnectivityManager connexionStatus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +44,12 @@ public class MainActivity extends AppCompatActivity {
         pb_main_progressionTrHa1 = findViewById(R.id.pb_main_progressionTtHa1);
         pb_main_progressionTrHa2 = findViewById(R.id.pb_main_progressionTtHa2);
         bt_main_startTrHa = findViewById(R.id.bt_main_startTrHa);
+
+        pb_main_progressionS7 = findViewById(R.id.pb_main_progressionS7);
+        bt_main_connexion_S7 = findViewById(R.id.bt_main_connexion_S7);
+       tv_main_plc = findViewById(R.id.tv_main_plc);
+       connexionStatus = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+       network = connexionStatus.getActiveNetworkInfo();
     }
 
     public void onMainClickManager(View view) {
@@ -66,7 +82,33 @@ public class MainActivity extends AppCompatActivity {
                 backgroundTask1.Start();
                 BackgroundTask backgroundTask2 = new BackgroundTask(view, bt_main_startTrHa, pb_main_progressionTrHa2);
                 backgroundTask2.Start();
+                break;
 
+            case R.id.bt_main_connexion_S7:
+
+                if(network != null && network.isConnectedOrConnecting()){
+                    if(bt_main_connexion_S7.getText().equals("Connexion_S7")){
+                        Toast.makeText(this, network.getTypeName(), Toast.LENGTH_SHORT).show();
+                        bt_main_connexion_S7.setText("Déconnexion_S7");
+                        readTaskS7 = new ReadTaskS7(view, bt_main_connexion_S7, pb_main_progressionS7,
+                                tv_main_plc);
+                        readTaskS7.Start("10.1.0.110", "0", "1");
+
+                    }
+                    else {
+                        readTaskS7.Stop();
+
+                        bt_main_connexion_S7.setText("Connexion_S7");
+                        Toast.makeText(getApplication(), "Traitement interrompue par l'utilisateur !",
+                                Toast.LENGTH_LONG).show();
+                    }
+
+
+                }
+                else {
+                    Toast.makeText(this, "Connexion au réseau impossible!", Toast.LENGTH_SHORT).show();
+
+                }
                 break;
         }
     }
