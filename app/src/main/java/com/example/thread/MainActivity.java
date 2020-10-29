@@ -8,6 +8,8 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +33,12 @@ public class MainActivity extends AppCompatActivity {
     private NetworkInfo network;
     private ConnectivityManager connexionStatus;
 
+    private LinearLayout ln_main_ecrireS7;
+    private CheckBox ch_main_activerouv;
+    private CheckBox ch_main_activerfer;
+    private CheckBox ch_main_aru;
+    private WriteTaskS7 writeTaskS7;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
        tv_main_plc = findViewById(R.id.tv_main_plc);
        connexionStatus = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
        network = connexionStatus.getActiveNetworkInfo();
+
+       ln_main_ecrireS7 = findViewById(R.id.ln_main_ecrireS7);
+       ch_main_activerouv = findViewById(R.id.ch_main_activerouv);
+       ch_main_activerfer = findViewById(R.id.ch_main_activerfer);
+       ch_main_aru = findViewById(R.id.ch_main_aru);
+
     }
 
     public void onMainClickManager(View view) {
@@ -93,22 +107,55 @@ public class MainActivity extends AppCompatActivity {
                         readTaskS7 = new ReadTaskS7(view, bt_main_connexion_S7, pb_main_progressionS7,
                                 tv_main_plc);
                         readTaskS7.Start("10.1.0.110", "0", "1");
-
                     }
                     else {
                         readTaskS7.Stop();
 
                         bt_main_connexion_S7.setText("Connexion_S7");
-                        Toast.makeText(getApplication(), "Traitement interrompue par l'utilisateur !",
+                        Toast.makeText(getApplication(), "Traitement interrompue par l'uti9lisateur !",
                                 Toast.LENGTH_LONG).show();
                     }
 
 
                 }
+                if(network != null && network.isConnectedOrConnecting()){
+                    if(bt_main_connexion_S7.getText().equals("Connexion_S7")) {
+
+                        ln_main_ecrireS7.setVisibility(View.VISIBLE);
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        writeTaskS7 = new WriteTaskS7();
+                        writeTaskS7.Start("10.1.0.110", "0", "1");
+                    }
+                    else {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        writeTaskS7.Stop();
+                        ln_main_ecrireS7.setVisibility(View.INVISIBLE);
+                    }
+
+                    }
                 else {
                     Toast.makeText(this, "Connexion au réseau impossible!", Toast.LENGTH_SHORT).show();
 
                 }
+                break;
+
+
+            case R.id.ch_main_activerouv:
+                writeTaskS7.setWriteBool(1, ch_main_activerouv.isChecked() ? 1 : 0);
+                break;
+            case R.id.ch_main_activerfer:
+                writeTaskS7.setWriteBool(2, ch_main_activerfer.isChecked() ? 1 : 0);
+            case R.id.ch_main_aru:
+                writeTaskS7.setWriteBool(4, ch_main_aru.isChecked() ? 1 : 0);
                 break;
         }
     }
